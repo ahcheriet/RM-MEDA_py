@@ -1,13 +1,22 @@
-import numpy as np
+from RMMEDA import *
+import matplotlib.pylab as plt
 
 
-#PopDec = np.random.uniform(0,1,(10,3))
-PopDec = np.array([[0.341131  , 0.404572 ,  0.794194],
-                   [0.236895  , 0.794194 ,  0.111832],
-                   [0.760747  , 0.892365 ,  0.634125],
-                   [0.715132 ,  0.689792 ,  0.062184],
-                   [0.681623 ,  0.495598 ,  0.430207]])
 
-M = 2
-K = 3
+prob = problem.zdt(1) # creating a problem here we used zdt1
+#prob = problem.dtlz(3)
+#prob = problem.kur() 
+#prob = problem.fon() 
+#prob = problem.cec2009(1)
+#prob = problem.cassini_1(objectives=2) 
+pop = population(prob,100)
+
+
+alg = rm_meda(gen = 20, K = 3)
+pop = alg.evolve(pop)
+pop.plot_pareto_fronts() # ploting pareto fronts
+#prob.plot(pop1)
+plt.show() 
+
+
 

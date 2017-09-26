@@ -2,14 +2,9 @@ import numpy as np
 from LocalPCA_v0 import *
 
 def RMMEDA_operator(PopDec,K,M):
-#    K = Global.ParameterSet(5);
-#    PopDec = Population.decs;
     N,D  = PopDec.shape
-#    M      = Global.M;
-    
     ## Modeling
     Model,probability = LocalPCA(PopDec,M,K)
-
     ## Reproduction
     OffspringDec = np.zeros((N,D))
     # Generate new trial solutions one by one
@@ -26,9 +21,7 @@ def RMMEDA_operator(PopDec,K,M):
         else:
             OffspringDec[i,:] = Model[k]['mean'] + np.random.randn(1,D)
 
-    
-#    Offspring = INDIVIDUAL(OffspringDec);
 
     return OffspringDec
     
-print RMMEDA_operator(PopDec,K,M)
+#print RMMEDA_operator(PopDec,K,M)
