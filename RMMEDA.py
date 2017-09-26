@@ -39,8 +39,7 @@ class rm_meda(algorithm.base):
         all_elements = []
         all_fitness = [] 
         lnp =len(pop)
-        best_idx = pop.get_best_idx(lnp)
-#      best_idx = pop.compute_pareto_fronts()[0]
+        best_idx = pop.get_best_idx(lnp-len(pop.compute_pareto_fronts()[-1]))
         for i in best_idx:
            all_elements.append(pop[i].cur_x)
            all_fitness.append(pop[i].cur_f)
@@ -51,7 +50,6 @@ class rm_meda(algorithm.base):
         dim, cont_dim, n_obj = prob.dimension, prob.dimension - prob.i_dimension, prob.f_dimension
         lb, ub = prob.lb, prob.ub
         varr, List, List_fitness = self.get_all_vectors_and_fitness(pop)  # We get the variables and the objective values
-        pop_size = len(List)     
         self.elements_array = np.array(List)            # Let us store the solutions and fitness values in arrays
         self.fitness_array = np.array(List_fitness) 
         return RMMEDA_operator(self.elements_array,self.__K,n_obj)
@@ -86,5 +84,5 @@ class rm_meda(algorithm.base):
 
 
    def get_name(self):
-         return "Copula-based Estimation of Distribution Algorithm with Objective dependencies"
+         return "RM-MEDA Algorithm"
 

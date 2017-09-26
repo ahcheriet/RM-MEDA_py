@@ -74,6 +74,8 @@ def LocalPCA(PopDec, M, K):
 #    volume = prod(cat(1,Model.b)-cat(1,Model.a),2)
     # Calculate the cumulative probability of each cluster
     probability = np.cumsum(volume/np.sum(volume))
-    
+#    print probability
+
+
     return Model,probability
 
