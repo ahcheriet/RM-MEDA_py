@@ -1,5 +1,6 @@
 import numpy as np
-#import scipy as sc
+
+
 #PopDec = np.random.uniform(0,1,(10,3))
 PopDec = np.array([[0.341131  , 0.404572 ,  0.794194],
                    [0.236895  , 0.794194 ,  0.111832],
@@ -30,7 +31,6 @@ def LocalPCA(PopDec, M, K):
         partition = np.argmin(distance,1) # get the index of mins
         # Update the model of each cluster
         updated = np.zeros(K, dtype=bool) # array of k false
-        print iteration
         for k in range(K):
             oldMean = Model[k]['mean']
             current = partition == k
@@ -61,15 +61,12 @@ def LocalPCA(PopDec, M, K):
     for k in range(K):
         if len(Model[k]['eVector']) != 0:
             hyperRectangle = (PopDec[partition==k,:]-np.tile(Model[k]['mean'],(sum(partition==k),1))).dot(Model[k]['eVector'][:,0:M-1])
-            print 'jj'
-            print Model[k]['eVector'][:,0:M-1]
             Model[k]['a']     = np.min(hyperRectangle) # this should by tested
             Model[k]['b']     = np.max(hyperRectangle) # this should by tested
         else:
             Model[k]['a'] = np.zeros((1,M-1))
             Model[k]['b'] = np.zeros((1,M-1))
  
-    print [Model[k]['b'] for k in range(K)]
     
     ## Calculate the probability of each cluster for reproduction
     # Calculate the volume of each cluster
@@ -79,6 +76,4 @@ def LocalPCA(PopDec, M, K):
     probability = np.cumsum(volume/np.sum(volume))
     
     return Model,probability
-    
-print LocalPCA(PopDec, M, K)[1]
-#end
+
