@@ -17,9 +17,9 @@ def RMMEDA_operator(PopDec,K,M):
             upper = Model[k]['b'] + 0.25*(Model[k]['b']-Model[k]['a'])
             trial = np.random.uniform(0,1)*(upper-lower) + lower # ,(1,M-1)
             sigma = np.sum(np.abs(Model[k]['eValue'][M-1:D]))/(D-M+1)
-            OffspringDec[i,:] = Model[k]['mean'] + trial*Model[k]['eVector'][:,:M-1].conj().transpose() + np.random.randn(1,D)*np.sqrt(sigma)
+            OffspringDec[i,:] = Model[k]['mean'] + trial*Model[k]['eVector'][:,:M-1].conj().transpose() + np.random.randn(D)*np.sqrt(sigma)
         else:
-            OffspringDec[i,:] = Model[k]['mean'] + np.random.randn(1,D)
+            OffspringDec[i,:] = Model[k]['mean'] + np.random.randn(D)
     return OffspringDec
     
-
+#RMMEDA_operator(PopDec,K,M)

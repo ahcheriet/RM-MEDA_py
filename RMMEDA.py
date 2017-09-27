@@ -39,7 +39,12 @@ class rm_meda(algorithm.base):
         all_elements = []
         all_fitness = [] 
         lnp =len(pop)
-        best_idx = pop.get_best_idx(lnp-len(pop.compute_pareto_fronts()[-1]))
+        print lnp
+        if len(pop.compute_pareto_fronts()[0]) != lnp:
+            best_idx = pop.get_best_idx(lnp-len(pop.compute_pareto_fronts()[-1]))
+        else:
+            best_idx = pop.compute_pareto_fronts()[0]
+        print best_idx
         for i in best_idx:
            all_elements.append(pop[i].cur_x)
            all_fitness.append(pop[i].cur_f)
