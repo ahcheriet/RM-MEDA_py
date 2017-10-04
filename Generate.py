@@ -1,5 +1,13 @@
+#!/usr/bin/env python
+# Partitioning the population by Local PCA algorithm
+
+# This function is translated from the Matlab code in
+# http://bimk.ahu.edu.cn/index.php?s=/Index/Software/index.html
+
+
+
 import numpy as np
-from LocalPCA_v0 import *
+from LocalPCA import *
 
 def RMMEDA_operator(PopDec,K,M,XLow,XUpp):
     N,D  = PopDec.shape
