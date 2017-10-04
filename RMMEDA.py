@@ -57,7 +57,7 @@ class rm_meda(algorithm.base):
         varr, List, List_fitness = self.get_all_vectors_and_fitness(pop)  # We get the variables and the objective values
         self.elements_array = np.array(List)            # Let us store the solutions and fitness values in arrays
         self.fitness_array = np.array(List_fitness) 
-        return RMMEDA_operator(self.elements_array,self.__K,n_obj)
+        return RMMEDA_operator(self.elements_array,self.__K,n_obj,lb, ub)
 
    def evolve(self, pop):
       if len(pop) == 0:

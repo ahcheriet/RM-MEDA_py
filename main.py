@@ -3,7 +3,7 @@ import matplotlib.pylab as plt
 
 
 
-prob = problem.zdt(3) # creating a problem here we used zdt1
+prob = problem.zdt(1) # creating a problem here we used zdt1
 #prob = problem.dtlz(3)
 #prob = problem.kur() 
 #prob = problem.fon() 
@@ -12,7 +12,7 @@ prob = problem.zdt(3) # creating a problem here we used zdt1
 pop = population(prob,20)
 
 
-alg = rm_meda(gen = 200, K = 5)
+alg = rm_meda(gen = 100, K = 5)
 pop = alg.evolve(pop)
 pop.plot_pareto_fronts() # ploting pareto fronts
 #prob.plot(pop1)

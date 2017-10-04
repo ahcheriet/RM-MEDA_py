@@ -1,7 +1,7 @@
 import numpy as np
 from LocalPCA_v0 import *
 
-def RMMEDA_operator(PopDec,K,M):
+def RMMEDA_operator(PopDec,K,M,XLow,XUpp):
     N,D  = PopDec.shape
     ## Modeling
     Model,probability = LocalPCA(PopDec,M,K)
@@ -20,6 +20,19 @@ def RMMEDA_operator(PopDec,K,M):
             OffspringDec[i,:] = Model[k]['mean'] + trial*Model[k]['eVector'][:,:M-1].conj().transpose() + np.random.randn(D)*np.sqrt(sigma)
         else:
             OffspringDec[i,:] = Model[k]['mean'] + np.random.randn(D)
+        NN,D = OffspringDec.shape
+        low = np.tile(XLow,(NN,1))
+        upp = np.tile(XUpp,(NN,1))
+        lbnd    = OffspringDec <= low
+        ubnd    = OffspringDec >= upp
+       # print OffspringDec
+       # print lbnd
+       # print ubnd
+       # input()
+        OffspringDec[lbnd] = 0.5*(PopDec[lbnd] + low[lbnd]); 
+        OffspringDec[ubnd] = 0.5*(PopDec[ubnd] + upp[ubnd]);
+
+            
     return OffspringDec
     
 #RMMEDA_operator(PopDec,K,M)
